@@ -1,0 +1,3 @@
+module Kinopoisk
+  # Your code goes here...
+end
