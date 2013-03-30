@@ -16,14 +16,6 @@ module Kinopoisk
       @url = "http://www.kinopoisk.ru/film/#{id}/"
     end
 
-    def title
-      document.search('.moviename-big').xpath('text()').text.strip
-    end
-
-    def title_en
-      document.search('span[itemprop="alternativeHeadline"]').text
-    end
-
     def year
       document.search("table.info a[href*='/m_act%5Byear%5D/']").text.to_i
     end
@@ -32,36 +24,8 @@ module Kinopoisk
       document.search("table.info a[href*='/m_act%5Bcountry%5D/']").text
     end
 
-    def directors
-      document.search('td[itemprop="director"]').text.gsub('...','').split(', ')
-    end
-
-    def writers
-      document.search("//td[text()='сценарий']").first.next.text.gsub('...','').split(', ')
-    end
-
-    def producers
-      document.search('td[itemprop="producer"]').text.gsub('...','').split(', ')
-    end
-
-    def operators
-      document.search("//td[text()='оператор']").first.next.text.gsub('...','').split(', ')
-    end
-
-    def composers
-      document.search('td[itemprop="musicBy"]').text.gsub('...','').split(', ')
-    end
-
-    def art_directors
-      document.search("//td[text()='художник']").first.next.text.gsub('...','').split(', ')
-    end
-
-    def editors
-      document.search("//td[text()='монтаж']").first.next.text.gsub('...','').split(', ')
-    end
-
-    def genres
-      document.search('td[itemprop="genre"]').text.gsub('...','').split(', ')
+    def title
+      document.search('.moviename-big').xpath('text()').text.strip
     end
 
     def world_premiere
@@ -76,8 +40,44 @@ module Kinopoisk
       document.search('td#runtime').text
     end
 
+    def directors
+      search_by_itemprop('director').convert_to_array
+    end
+
+    def producers
+      search_by_itemprop('producer').convert_to_array
+    end
+
+    def composers
+      search_by_itemprop('musicBy').convert_to_array
+    end
+
+    def genres
+      search_by_itemprop('genre').convert_to_array
+    end
+
+    def title_en
+      search_by_itemprop 'alternativeHeadline'
+    end
+
     def description
-      document.search('div[itemprop="description"]').text
+      search_by_itemprop 'description'
+    end
+
+    def writers
+      search_by_text 'сценарий'
+    end
+
+    def operators
+      search_by_text 'оператор'
+    end
+
+    def art_directors
+      search_by_text 'художник'
+    end
+
+    def editors
+      search_by_text 'монтаж'
     end
 
     private
@@ -91,6 +91,14 @@ module Kinopoisk
     def find_by_title title
       url = SEARCH_URL+"#{title}&first=yes"
       Kinopoisk.fetch(url).headers['Location'].to_s.match(/\/(\d*)\/$/)[1]
+    end
+
+    def search_by_itemprop name
+      document.search("[itemprop=#{name}]").text
+    end
+
+    def search_by_text name
+      document.search("//td[text()='#{name}']").first.next.text.convert_to_array
     end
   end
 end
