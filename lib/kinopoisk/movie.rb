@@ -41,19 +41,19 @@ module Kinopoisk
     end
 
     def directors
-      search_by_itemprop('director').convert_to_array
+      to_array search_by_itemprop 'director'
     end
 
     def producers
-      search_by_itemprop('producer').convert_to_array
+      to_array search_by_itemprop 'producer'
     end
 
     def composers
-      search_by_itemprop('musicBy').convert_to_array
+      to_array search_by_itemprop 'musicBy'
     end
 
     def genres
-      search_by_itemprop('genre').convert_to_array
+      to_array search_by_itemprop 'genre'
     end
 
     def title_en
@@ -98,7 +98,11 @@ module Kinopoisk
     end
 
     def search_by_text name
-      document.search("//td[text()='#{name}']").first.next.text.convert_to_array
+      to_array document.search("//td[text()='#{name}']").first.next.text
+    end
+
+    def to_array string
+      string.gsub('...', '').split(', ')
     end
   end
 end

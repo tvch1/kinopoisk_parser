@@ -10,9 +10,3 @@ module Kinopoisk
     HTTPClient.new.get url, nil, { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' }
   end
 end
-
-String.class_eval do
-  def convert_to_array
-    self.gsub('...', '').split(', ')
-  end
-end
