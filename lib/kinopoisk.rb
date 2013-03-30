@@ -1,5 +1,5 @@
 require 'nokogiri'
-require 'open-uri'
+require 'httpclient'
 require 'kinopoisk/movie'
 
 module Kinopoisk
@@ -7,6 +7,6 @@ module Kinopoisk
 
   # Headers are needed to mimic proper request so kinopoisk won't block it
   def self.fetch url
-    open url, 'User-Agent'=>'Mozilla', 'Accept-Encoding'=>'a'
+    HTTPClient.new.get url, nil, { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' }
   end
 end
