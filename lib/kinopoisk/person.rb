@@ -3,7 +3,7 @@ module Kinopoisk
   class Person
     attr_accessor :id, :url, :name
 
-    def initialize id, name=nil
+    def initialize(id, name=nil)
       @id   = id
       @url  = "http://www.kinopoisk.ru/name/#{id}/"
       @name = name
@@ -67,7 +67,7 @@ module Kinopoisk
       @doc ||= Kinopoisk.parse url
     end
 
-    def search_by_text name
+    def search_by_text(name)
       doc.search("//td[@class='type'][text()='#{name}']").first.next.text
     end
   end

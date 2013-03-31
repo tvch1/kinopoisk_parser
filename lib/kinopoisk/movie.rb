@@ -11,7 +11,7 @@ module Kinopoisk
     # Initializing by title would send a search request and return first match.
     # Movie page request is made once and on the first access to a remote data.
     #
-    def initialize input, title=nil
+    def initialize(input, title=nil)
       @id    = input.is_a?(String) ? find_by_title(input) : input
       @url   = "http://www.kinopoisk.ru/film/#{id}/"
       @title = title
@@ -118,20 +118,20 @@ module Kinopoisk
 
     # Kinopoisk has defined first=yes param to redirect to first result
     # Return its id from location header
-    def find_by_title title
+    def find_by_title(title)
       url = SEARCH_URL+"#{title}&first=yes"
       Kinopoisk.fetch(url).headers['Location'].to_s.match(/\/(\d*)\/$/)[1]
     end
 
-    def search_by_itemprop name
+    def search_by_itemprop(name)
       doc.search("[itemprop=#{name}]").text
     end
 
-    def search_by_text name
+    def search_by_text(name)
       to_array doc.search("//td[text()='#{name}']").first.next.text
     end
 
-    def to_array string
+    def to_array(string)
       string.gsub('...', '').split(', ')
     end
   end
