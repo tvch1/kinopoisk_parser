@@ -42,6 +42,10 @@ module Kinopoisk
       doc.search("table.info a[href*='/m_act%5Bcountry%5D/']").text
     end
 
+    def poster
+      doc.search("img[itemprop='image']").first.attr 'src'
+    end
+
     def world_premiere
       doc.search('td#div_world_prem_td2 a:first').text
     end
@@ -52,6 +56,10 @@ module Kinopoisk
 
     def rating
       doc.search('span.rating_ball').text.to_f
+    end
+
+    def poster_big
+      poster.gsub 'film', 'film_big'
     end
 
     def length
@@ -105,14 +113,13 @@ module Kinopoisk
     private
 
     def doc
-      @doc ||= Nokogiri::HTML Kinopoisk.fetch(url).body.encode('utf-8')
+      @doc ||= Kinopoisk.parse url
     end
 
     # Kinopoisk has defined first=yes param to redirect to first result
     # Return its id from location header
     def find_by_title title
-      @title = title
-      url    = SEARCH_URL+"#{title}&first=yes"
+      url = SEARCH_URL+"#{title}&first=yes"
       Kinopoisk.fetch(url).headers['Location'].to_s.match(/\/(\d*)\/$/)[1]
     end
 

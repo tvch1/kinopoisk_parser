@@ -11,4 +11,9 @@ module Kinopoisk
   def self.fetch url
     HTTPClient.new.get url, nil, { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' }
   end
+
+  def self.parse url
+    page = fetch url
+    page.status == 200 ? Nokogiri::HTML(page.body.encode('utf-8')) : raise
+  end
 end

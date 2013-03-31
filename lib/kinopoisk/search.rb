@@ -21,7 +21,7 @@ module Kinopoisk
     private
 
     def doc
-      @doc ||= Nokogiri::HTML Kinopoisk.fetch(url).body.encode('utf-8')
+      @doc ||= Kinopoisk.parse url
     end
   end
 end

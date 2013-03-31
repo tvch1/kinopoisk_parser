@@ -9,6 +9,8 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movie' } do
   it { movie.title_en.should eq('Dexter') }
   it { movie.country.should eq('США') }
   it { movie.year.should eq(2006) }
+  it { movie.poster.should eq('http://st.kinopoisk.ru/images/film/277537.jpg') }
+  it { movie.poster_big.should eq('http://st.kinopoisk.ru/images/film_big/277537.jpg') }
   it { movie.producers.should eq(['Сара Коллетон','Джон Голдвин','Роберт Ллойд Льюис']) }
   it { movie.art_directors.should eq(['Джессика Кендер','Энтони Коули','Эрик Уейлер']) }
   it { movie.operators.should eq(['Ромео Тироне','Джеф Джёр','Мартин Дж. Лэйтон']) }
@@ -31,6 +33,10 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movie' } do
     movie.title
     movie.country
     a_request(:get, movie.url).should have_been_made.once
+  end
+
+  it 'should raise error if nothing found' do
+    expect { Kinopoisk::Movie.new(111111111).title }.to raise_error
   end
 
   context 'by title' do
