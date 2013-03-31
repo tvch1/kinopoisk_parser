@@ -1,10 +1,10 @@
 Gem::Specification.new do |gem|
-  gem.name          = 'kinopoisk'
-  gem.version       = '0.0.1'
+  gem.name          = 'kinopoisk_parser'
+  gem.version       = '1.0.0'
   gem.authors       = ['RavWar']
   gem.email         = ['rav_war@mail.ru']
-  gem.homepage      = 'https://github.com/RavWar/kinopoisk'
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.homepage      = 'https://github.com/RavWar/kinopoisk_parser'
+  gem.summary       = 'Easily search and access information on kinopoisk.ru'
   gem.description   = %q{TODO: Write a gem description}
 
   gem.files         = `git ls-files`.split($/)

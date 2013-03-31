@@ -1,12 +1,16 @@
-# Kinopoisk
+# Kinopoisk Parser
 
-TODO: Write a gem description
+Easily search and access information on kinopoisk.ru
+
+[![Build Status](https://secure.travis-ci.org/RavWar/kinopoisk_parser.png)](http://travis-ci.org/RavWar/kinopoisk_parser)
+[![Code Climate](https://codeclimate.com/github/RavWar/kinopoisk_parser.png)](https://codeclimate.com/github/RavWar/kinopoisk_parser)
+[![Dependency Status](https://gemnasium.com/RavWar/kinopoisk_parser.png)](https://gemnasium.com/RavWar/kinopoisk_parser)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'kinopoisk'
+    gem 'kinopoisk_parser'
 
 And then execute:
 
@@ -14,7 +18,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install kinopoisk
+    $ gem install kinopoisk_parser
 
 ## Usage
 
