@@ -1,6 +1,8 @@
 require 'nokogiri'
 require 'httpclient'
 require 'kinopoisk/movie'
+require 'kinopoisk/search'
+require 'kinopoisk/person'
 
 module Kinopoisk
   SEARCH_URL = "http://www.kinopoisk.ru/index.php?kp_query="
