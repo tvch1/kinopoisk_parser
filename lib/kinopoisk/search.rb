@@ -8,10 +8,12 @@ module Kinopoisk
       @url   = SEARCH_URL + query.to_s
     end
 
+    # Returns an array containing Kinopoisk::Movie instances
     def movies
       find_nodes('film').map{|n| new_movie n }
     end
 
+    # Returns an array containing Kinopoisk::Person instances
     def people
       find_nodes('people').map{|n| new_person n }
     end

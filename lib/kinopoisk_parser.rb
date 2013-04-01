@@ -13,6 +13,7 @@ module Kinopoisk
     HTTPClient.new.get url, nil, { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' }
   end
 
+  # Returns a nokogiri document or an error if fetch response status is not 200
   def self.parse(url)
     p = fetch url
     p.status==200 ? Nokogiri::HTML(p.body.encode('utf-8')) : raise(NotFound)

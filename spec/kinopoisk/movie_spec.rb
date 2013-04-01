@@ -29,11 +29,11 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { dexter.imdb_rating.should be_a(Float) }
   it { dexter.rating_count.should be_a(Integer) }
   it { dexter.rating.should be_a(Float) }
-  it { dexter.gross_ru.should eq('') }
+  it { dexter.box_office_ru.should eq('') }
 
-  it { avatar.gross_world.should match('[$\d]') }
-  it { avatar.gross_ru.should match('[$\d]') }
-  it { avatar.gross_us.should match('[$\d]') }
+  it { avatar.box_office_world.should match('[$\d]') }
+  it { avatar.box_office_ru.should match('[$\d]') }
+  it { avatar.box_office_us.should match('[$\d]') }
   it { avatar.budget.should eq("$237 000 000") }
   it { avatar.length.should eq(162) }
 
