@@ -1,5 +1,5 @@
+require 'kinopoisk_parser'
 require 'webmock/rspec'
-require 'kinopoisk'
 require 'vcr'
 
 VCR.configure do |c|
