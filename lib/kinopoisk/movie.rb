@@ -42,15 +42,31 @@ module Kinopoisk
       doc.search("table.info a[href*='/m_act%5Bcountry%5D/']").map(&:text)
     end
 
+    def budget
+      doc.search("//td[text()='бюджет']/following-sibling::*//a").text
+    end
+
+    def gross_ru
+      doc.search("td#div_rus_box_td2 a").text
+    end
+
+    def gross_us
+      doc.search("td#div_usa_box_td2 a").text
+    end
+
+    def gross_world
+      doc.search("td#div_world_box_td2 a").text
+    end
+
     def poster
       doc.search("img[itemprop='image']").first.attr 'src'
     end
 
-    def world_premiere
+    def premiere_world
       doc.search('td#div_world_prem_td2 a:first').text
     end
 
-    def ru_premiere
+    def premiere_ru
       doc.search('td#div_rus_prem_td2 a:first').text
     end
 
@@ -63,7 +79,7 @@ module Kinopoisk
     end
 
     def length
-      doc.search('td#runtime').text
+      doc.search('td#runtime').text.to_i
     end
 
     def directors
@@ -132,7 +148,7 @@ module Kinopoisk
     end
 
     def search_by_text(name)
-      doc.search("//td[text()='#{name}']").first.next.text
+      doc.search("//td[text()='#{name}']/following-sibling::*").text
     end
 
     def to_array(string)

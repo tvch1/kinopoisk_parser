@@ -22,7 +22,7 @@ module Kinopoisk
     end
 
     def partner
-      doc.search("//td[@class='type'][contains(text(),'супруг')]").first.next.text
+      doc.search("//td[@class='type'][contains(text(),'супруг')]/following-sibling::*").text
     end
 
     def birthdate
@@ -68,7 +68,7 @@ module Kinopoisk
     end
 
     def search_by_text(name)
-      doc.search("//td[@class='type'][text()='#{name}']").first.next.text
+      doc.search("//td[@class='type'][text()='#{name}']/following-sibling::*").text
     end
   end
 end

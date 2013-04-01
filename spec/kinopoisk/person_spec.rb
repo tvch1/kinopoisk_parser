@@ -1,7 +1,7 @@
 #coding: UTF-8
 require 'spec_helper'
 
-describe Kinopoisk::Person, vcr: { cassette_name: 'person' } do
+describe Kinopoisk::Person, vcr: { cassette_name: 'people' } do
   let(:person) { Kinopoisk::Person.new 13180 }
 
   it 'should return right url' do

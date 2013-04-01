@@ -6,6 +6,7 @@ require 'kinopoisk/person'
 
 module Kinopoisk
   SEARCH_URL = "http://www.kinopoisk.ru/index.php?kp_query="
+  NotFound   = Class.new StandardError
 
   # Headers are needed to mimic proper request so kinopoisk won't block it
   def self.fetch(url)
@@ -13,7 +14,7 @@ module Kinopoisk
   end
 
   def self.parse(url)
-    page = fetch url
-    page.status == 200 ? Nokogiri::HTML(page.body.encode('utf-8')) : raise
+    p = fetch url
+    p.status==200 ? Nokogiri::HTML(p.body.encode('utf-8')) : raise(NotFound)
   end
 end

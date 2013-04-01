@@ -3,8 +3,9 @@
 Easily search and access information on kinopoisk.ru
 
 [![Build Status](https://secure.travis-ci.org/RavWar/kinopoisk_parser.png)](http://travis-ci.org/RavWar/kinopoisk_parser)
-[![Code Climate](https://codeclimate.com/github/RavWar/kinopoisk_parser.png)](https://codeclimate.com/github/RavWar/kinopoisk_parser)
 [![Dependency Status](https://gemnasium.com/RavWar/kinopoisk_parser.png)](https://gemnasium.com/RavWar/kinopoisk_parser)
+[![Gem Version](https://badge.fury.io/rb/kinopoisk_parser.png)](http://badge.fury.io/rb/kinopoisk_parser)
+[![Code Climate](https://codeclimate.com/github/RavWar/kinopoisk_parser.png)](https://codeclimate.com/github/RavWar/kinopoisk_parser)
 
 ## Installation
 
