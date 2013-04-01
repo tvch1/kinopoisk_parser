@@ -5,7 +5,10 @@ Gem::Specification.new do |gem|
   gem.email         = ['rav_war@mail.ru']
   gem.homepage      = 'https://github.com/RavWar/kinopoisk_parser'
   gem.summary       = 'Easily search and access information on kinopoisk.ru'
-  gem.description   = %q{TODO: Write a gem description}
+  gem.description   = <<-DESCRIPTION
+    This gem allows you to easily search and access publicly available
+    information about movies and actors on kinopoisk.ru
+  DESCRIPTION
 
   gem.files         = `git ls-files`.split($/)
   gem.test_files    = gem.files.grep %r{^spec/}

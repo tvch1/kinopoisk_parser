@@ -38,8 +38,8 @@ module Kinopoisk
       doc.search("table.info a[href*='/m_act%5Byear%5D/']").text.to_i
     end
 
-    def country
-      doc.search("table.info a[href*='/m_act%5Bcountry%5D/']").text
+    def countries
+      doc.search("table.info a[href*='/m_act%5Bcountry%5D/']").map(&:text)
     end
 
     def poster
@@ -95,19 +95,23 @@ module Kinopoisk
     end
 
     def writers
-      search_by_text 'сценарий'
+      to_array search_by_text 'сценарий'
     end
 
     def operators
-      search_by_text 'оператор'
+      to_array search_by_text 'оператор'
     end
 
     def art_directors
-      search_by_text 'художник'
+      to_array search_by_text 'художник'
     end
 
     def editors
-      search_by_text 'монтаж'
+      to_array search_by_text 'монтаж'
+    end
+
+    def slogan
+      search_by_text 'слоган'
     end
 
     private
@@ -128,7 +132,7 @@ module Kinopoisk
     end
 
     def search_by_text(name)
-      to_array doc.search("//td[text()='#{name}']").first.next.text
+      doc.search("//td[text()='#{name}']").first.next.text
     end
 
     def to_array(string)

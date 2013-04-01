@@ -22,7 +22,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Movie
+
+Initialize with
+
+    m = Kinopoisk::Movie.new 277537
+
+or
+
+    m = Kinopoisk::Movie.new 'Dexter'
+
+Access information
+
+    m.title
+    #=> "Правосудие Декстера"
+
+    m.countries
+    #=> ["США"]
+
+    m.slogan
+    #=> "«Takes life. Seriously.»"
+
+### Search
+
+    s = Kinopoisk::Search.new 'Life of Pi'
+
+    s.movies.count
+    #=> 6
+
+    s.people.count
+    #=> 5
+
+### Person
+
+    p = Kinopoisk::Person.new 25584
+
+    p.name
+    #=> "Брэд Питт"
+
+    p.career
+    #=> ["Актер", "Продюсер"]
 
 ## Contributing
 

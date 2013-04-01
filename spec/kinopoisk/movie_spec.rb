@@ -7,7 +7,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movie' } do
   it { movie.url.should eq('http://www.kinopoisk.ru/film/277537/') }
   it { movie.title.should eq('Правосудие Декстера') }
   it { movie.title_en.should eq('Dexter') }
-  it { movie.country.should eq('США') }
+  it { movie.countries.should eq(['США']) }
   it { movie.year.should eq(2006) }
   it { movie.poster.should eq('http://st.kinopoisk.ru/images/film/277537.jpg') }
   it { movie.poster_big.should eq('http://st.kinopoisk.ru/images/film_big/277537.jpg') }
@@ -19,6 +19,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movie' } do
   it { movie.actors.should include('Майкл С. Холл', 'Дженнифер Карпентер') }
   it { movie.genres.should eq(['триллер','драма','криминал', 'детектив']) }
   it { movie.directors.should eq(['Джон Дал','Стив Шилл','Кит Гордон']) }
+  it { movie.slogan.should eq('«Takes life. Seriously.»') }
   it { movie.description.should match('Декстер Морган.') }
   it { movie.world_premiere.should eq('1 октября 2006') }
   it { movie.ru_premiere.should eq('3 ноября 2008') }
@@ -31,7 +32,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movie' } do
 
   it 'should make only one request' do
     movie.title
-    movie.country
+    movie.countries
     a_request(:get, movie.url).should have_been_made.once
   end
 
@@ -51,7 +52,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movie' } do
 
     it 'should make max two requests' do
       movie_by_title.title
-      movie_by_title.country
+      movie_by_title.countries
       a_request(:get, /.*/).should have_been_made.twice
     end
   end
