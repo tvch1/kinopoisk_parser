@@ -64,6 +64,10 @@ Access information
     p.career
     #=> ["Актер", "Продюсер"]
 
+## Documentation
+
+http://rubydoc.info/gems/kinopoisk_parser/frames
+
 ## Contributing
 
 1. Fork it
