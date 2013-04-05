@@ -5,7 +5,7 @@ module Kinopoisk
 
     def initialize(query)
       @query = query
-      @url   = SEARCH_URL + query.to_s
+      @url   = SEARCH_URL + URI.escape(query.to_s)
     end
 
     # Returns an array containing Kinopoisk::Movie instances
