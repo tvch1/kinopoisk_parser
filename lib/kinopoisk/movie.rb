@@ -21,10 +21,7 @@ module Kinopoisk
 
     # Returns an array of strings containing actor names
     def actors
-      links = doc.search('#actorList li a')
-      links.map do |link|
-        Kinopoisk::Person.new link.attr('href')[/\/name\/(\d+)/, 1] unless link.text == '...'
-      end.compact
+      links_to_people doc.search '#actorList li a'
     end
 
     # Returns a string containing title in russian
@@ -119,7 +116,7 @@ module Kinopoisk
 
     # Returns an array of strings containing director names
     def directors
-      to_array search_by_itemprop 'director'
+      links_to_people doc.search("[itemprop='director']/a")
     end
 
     # Returns an array of strings containing producer names
@@ -185,6 +182,16 @@ module Kinopoisk
 
     def to_array(string)
       string.gsub('...', '').split(', ')
+    end
+
+    def links_to_people(links)
+      links.map do |link|
+        Kinopoisk::Person.new a_tag_to_id(link) unless link.text == '...'
+      end.compact
+    end
+
+    def a_tag_to_id(tag)
+      tag.attr('href')[/\/name\/(\d+)/, 1].to_i
     end
   end
 end

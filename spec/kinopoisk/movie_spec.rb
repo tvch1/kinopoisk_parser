@@ -19,7 +19,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { dexter.writers.should eq(['Скотт Бак', 'Карен Кэмпбелл', 'Дэниэл Церон']) }
   it { dexter.actors.map(&:name).should include('Майкл С. Холл', 'Дженнифер Карпентер') }
   it { dexter.genres.should eq(['триллер','драма','криминал', 'детектив']) }
-  it { dexter.directors.should eq(['Джон Дал','Стив Шилл','Кит Гордон']) }
+  it { dexter.directors.map(&:name).should eq(['Джон Дал','Стив Шилл','Кит Гордон']) }
   it { dexter.slogan.should eq('«Takes life. Seriously»') }
   it { dexter.description.should match('Декстер Морган.') }
   it { dexter.premiere_world.should eq('1 октября 2006') }
