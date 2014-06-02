@@ -24,7 +24,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { dexter.description.should match('Декстер Морган.') }
   it { dexter.premiere_world.should eq('1 октября 2006') }
   it { dexter.premiere_ru.should eq('3 ноября 2008') }
-  it { dexter.composers.should eq(['Дэниэл Лихт']) }
+  it { dexter.composers.map(&:name).should eq(['Дэниэл Лихт']) }
   it { dexter.imdb_rating_count.should be_a(Integer) }
   it { dexter.imdb_rating.should be_a(Float) }
   it { dexter.rating_count.should be_a(Integer) }

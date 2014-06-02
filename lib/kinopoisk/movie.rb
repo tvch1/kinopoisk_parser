@@ -126,7 +126,7 @@ module Kinopoisk
 
     # Returns an array of strings containing composer names
     def composers
-      to_array search_by_itemprop 'musicBy'
+      links_to_people doc.search("[itemprop='musicBy']/a")
     end
 
     # Returns an array of strings containing genres
