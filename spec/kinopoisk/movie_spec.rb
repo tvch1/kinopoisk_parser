@@ -16,7 +16,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { dexter.art_directors.should eq(['Джессика Кендер','Энтони Коули','Эрик Уейлер']) }
   it { dexter.operators.should eq(['Ромео Тироне','Джеф Джёр','Мартин Дж. Лэйтон']) }
   it { dexter.editors.should eq(['Луис Ф. Циоффи','Стюарт Шилл','Кит Хендерсон']) }
-  it { dexter.writers.should eq(['Скотт Бак', 'Карен Кэмпбелл', 'Дэниэл Церон']) }
+  it { dexter.writers.map(&:name).should eq(['Скотт Бак', 'Карен Кэмпбелл', 'Дэниэл Церон']) }
   it { dexter.actors.map(&:name).should include('Майкл С. Холл', 'Дженнифер Карпентер') }
   it { dexter.genres.should eq(['триллер','драма','криминал', 'детектив']) }
   it { dexter.directors.map(&:name).should eq(['Джон Дал','Стив Шилл','Кит Гордон']) }
