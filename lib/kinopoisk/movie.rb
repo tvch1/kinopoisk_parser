@@ -21,7 +21,7 @@ module Kinopoisk
 
     # Returns an array of strings containing actor names
     def actors
-      doc.search('td.actor_list div a').map{|n| n.text.gsub("\n",'').strip}
+      doc.search('#actorList li a').map{|n| n.text.gsub("\n",'').strip}
         .delete_if{|text| text=='...'}
     end
 

@@ -15,7 +15,7 @@ module Kinopoisk
 
     # Returns an array containing Kinopoisk::Person instances
     def people
-      find_nodes('people').map{|n| new_person n }
+      find_nodes('name').map{|n| new_person n }
     end
 
     private
@@ -25,7 +25,7 @@ module Kinopoisk
     end
 
     def find_nodes(type)
-      doc.search ".info .name a[href*='/#{type}/']"
+      doc.search(".info .name a[href*='/#{type}/']")
     end
 
     def parse_id(node, type)
@@ -37,7 +37,7 @@ module Kinopoisk
     end
 
     def new_person(node)
-      Person.new parse_id(node, 'people'), node.text
+      Person.new parse_id(node, 'name'), node.text
     end
   end
 end
