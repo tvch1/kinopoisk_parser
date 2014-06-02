@@ -151,7 +151,7 @@ module Kinopoisk
 
     # Returns an array of strings containing editor names
     def editors
-      to_array search_by_text 'монтаж'
+      links_to_people doc.search("//td[text()='монтаж']/following-sibling::td//a")
     end
 
     # Returns a string containing movie slogan
