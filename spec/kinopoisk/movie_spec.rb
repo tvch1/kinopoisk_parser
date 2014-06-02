@@ -17,7 +17,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { dexter.operators.should eq(['Ромео Тироне','Джеф Джёр','Мартин Дж. Лэйтон']) }
   it { dexter.editors.should eq(['Луис Ф. Циоффи','Стюарт Шилл','Кит Хендерсон']) }
   it { dexter.writers.should eq(['Скотт Бак', 'Карен Кэмпбелл', 'Дэниэл Церон']) }
-  it { dexter.actors.should include('Майкл С. Холл', 'Дженнифер Карпентер') }
+  it { dexter.actors.map(&:name).should include('Майкл С. Холл', 'Дженнифер Карпентер') }
   it { dexter.genres.should eq(['триллер','драма','криминал', 'детектив']) }
   it { dexter.directors.should eq(['Джон Дал','Стив Шилл','Кит Гордон']) }
   it { dexter.slogan.should eq('«Takes life. Seriously»') }

@@ -21,8 +21,10 @@ module Kinopoisk
 
     # Returns an array of strings containing actor names
     def actors
-      doc.search('#actorList li a').map{|n| n.text.gsub("\n",'').strip}
-        .delete_if{|text| text=='...'}
+      links = doc.search('#actorList li a')
+      links.map do |link|
+        Kinopoisk::Person.new link.attr('href')[/\/name\/(\d+)/, 1] unless link.text == '...'
+      end.compact
     end
 
     # Returns a string containing title in russian
