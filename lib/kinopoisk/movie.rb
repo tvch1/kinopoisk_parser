@@ -121,7 +121,7 @@ module Kinopoisk
 
     # Returns an array of strings containing producer names
     def producers
-      to_array search_by_itemprop 'producer'
+      links_to_people doc.search("[itemprop='producer']/a")
     end
 
     # Returns an array of strings containing composer names
