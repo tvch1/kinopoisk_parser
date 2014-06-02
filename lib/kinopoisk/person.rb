@@ -43,7 +43,7 @@ module Kinopoisk
 
     # Returns a string containing birthplace
     def birthplace
-      search_by_text('место рождения').split(', ').first
+      search_by_text('место рождения')
     end
 
     # Returns an array of strings containing genres

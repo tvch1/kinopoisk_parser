@@ -15,7 +15,7 @@ describe Kinopoisk::Person, vcr: { cassette_name: 'people' } do
   it { person.partner.should eq('Далия Ибельхауптайте') }
   it { person.name_en.should eq('Dexter Fletcher') }
   it { person.name.should eq('Декстер Флетчер') }
-  it { person.birthplace.should eq('Лондон') }
+  it { person.birthplace.should eq('Лондон, Англия, Великобритания') }
   it { person.first_movie.should eq('1976') }
   it { person.last_movie.should eq('2014') }
   it { person.birthdate.should be_a(Date) }
