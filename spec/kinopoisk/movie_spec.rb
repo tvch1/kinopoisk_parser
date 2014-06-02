@@ -31,7 +31,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { dexter.rating.should be_a(Float) }
   it { dexter.box_office_ru.should eq('') }
 
-  it { avatar.box_office_world.should match('[$\d]') }
+  it { avatar.box_office_world.should eq(2782275172) }
   it { avatar.box_office_ru.should match('[$\d]') }
   it { avatar.box_office_us.should match('[$\d]') }
   it { avatar.budget.should eq("237000000".to_i) }
