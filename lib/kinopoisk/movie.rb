@@ -52,7 +52,7 @@ module Kinopoisk
 
     # Returns a string containing budget for the movie
     def budget
-      doc.search("//td[text()='бюджет']/following-sibling::*//a").text
+      doc.search("//td[text()='бюджет']/following-sibling::*//a").text.gsub(/\D/, '').to_i
     end
 
     # Returns a string containing Russia box-office

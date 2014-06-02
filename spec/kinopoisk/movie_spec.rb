@@ -34,7 +34,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { avatar.box_office_world.should match('[$\d]') }
   it { avatar.box_office_ru.should match('[$\d]') }
   it { avatar.box_office_us.should match('[$\d]') }
-  it { avatar.budget.should eq("$237 000 000") }
+  it { avatar.budget.should eq("237000000".to_i) }
   it { avatar.length.should eq(162) }
 
   it 'should make only one request' do
