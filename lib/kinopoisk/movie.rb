@@ -146,7 +146,7 @@ module Kinopoisk
 
     # Returns an array of strings containing art director names
     def art_directors
-      to_array search_by_text 'художник'
+      links_to_people doc.search("//td[text()='художник']/following-sibling::td//a")
     end
 
     # Returns an array of strings containing editor names

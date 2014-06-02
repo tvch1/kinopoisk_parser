@@ -13,7 +13,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { dexter.poster.should eq('http://st.kp.yandex.net/images/film_iphone/iphone360_277537.jpg') }
   it { dexter.poster_big.should eq('http://st.kp.yandex.net/images/film_big_iphone/iphone360_277537.jpg') }
   it { dexter.producers.map(&:name).should eq(['Сара Коллетон','Джон Голдвин','Роберт Ллойд Льюис']) }
-  it { dexter.art_directors.should eq(['Джессика Кендер','Энтони Коули','Эрик Уейлер']) }
+  it { dexter.art_directors.map(&:name).should eq(['Джессика Кендер','Энтони Коули','Эрик Уейлер']) }
   it { dexter.operators.map(&:name).should eq(['Ромео Тироне','Джеф Джёр','Мартин Дж. Лэйтон']) }
   it { dexter.editors.should eq(['Луис Ф. Циоффи','Стюарт Шилл','Кит Хендерсон']) }
   it { dexter.writers.map(&:name).should eq(['Скотт Бак', 'Карен Кэмпбелл', 'Дэниэл Церон']) }
