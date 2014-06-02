@@ -141,7 +141,7 @@ module Kinopoisk
 
     # Returns an array of strings containing operator names
     def operators
-      to_array search_by_text 'оператор'
+      links_to_people doc.search("//td[text()='оператор']/following-sibling::td//a")
     end
 
     # Returns an array of strings containing art director names
