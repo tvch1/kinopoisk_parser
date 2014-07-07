@@ -66,7 +66,8 @@ module Kinopoisk
 
     # Returns a string containing world box-office
     def box_office_world
-      doc.search("//td[text()='сборы в мире']/following-sibling::td//div/a[1]").text[/=(.+)$/, 1].gsub(/\D/, '').to_i
+      value = doc.search("//td[text()='сборы в мире']/following-sibling::td//div/a[1]").text[/=(.+)$/, 1]
+      value && value.gsub(/\D/, '').to_i
     end
 
     # Returns a url to a small sized poster

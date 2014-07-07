@@ -2,8 +2,9 @@
 require 'spec_helper'
 
 describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
-  let(:dexter) { Kinopoisk::Movie.new 277537 }
-  let(:avatar) { Kinopoisk::Movie.new 251733 }
+  let(:dexter)   { Kinopoisk::Movie.new 277537 }
+  let(:avatar)   { Kinopoisk::Movie.new 251733 }
+  let(:hercules) { Kinopoisk::Movie.new 461958 }
 
   it { dexter.url.should eq('http://www.kinopoisk.ru/film/277537/') }
   it { dexter.title.should eq('Правосудие Декстера') }
@@ -36,6 +37,8 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { avatar.box_office_us.should match('[$\d]') }
   it { avatar.budget.should eq("237000000".to_i) }
   it { avatar.length.should eq(162) }
+
+  it { expect(hercules.box_office_world).to be_nil }
 
   it 'should make only one request' do
     dexter.title
