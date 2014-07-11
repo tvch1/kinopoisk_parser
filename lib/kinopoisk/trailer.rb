@@ -40,7 +40,7 @@ module Kinopoisk
           @files[found_dimensions][found_quality] = link.attr 'href'
         end
       end
-      "http://www.kinopoisk.ru#{@files[dimensions][quality]}" if @files[dimensions][quality]
+      @files[dimensions][quality].gsub! /.*link=(.*)$/, '\1' if @files[dimensions][quality]
     end
 
     private
