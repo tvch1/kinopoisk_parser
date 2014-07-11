@@ -1,7 +1,6 @@
 #coding: UTF-8
 module Kinopoisk
   class Trailer
-    attr_accessor :id, :url, :title
     attr_accessor :id, :movie_id, :url, :title
 
     # New instance can be initialized with id(integer) or title(string). Second
