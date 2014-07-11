@@ -93,7 +93,7 @@ module Kinopoisk
     # Returns a url to a big sized poster
     def poster_big
       big_image = doc.search("a.popupBigImage").first
-      "http://www.kinopoisk.ru/images/film_big/#{@id}.jpg" if big_image.try :attr, 'href'
+      "http://www.kinopoisk.ru/images/film_big/#{@id}.jpg" if big_image && big_image.attr('href')
     end
 
     # Returns an integer length of the movie in minutes

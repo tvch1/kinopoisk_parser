@@ -6,13 +6,13 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   let(:avatar)   { Kinopoisk::Movie.new 251733 }
   let(:hercules) { Kinopoisk::Movie.new 461958 }
 
-  it { dexter.url.should eq('http://www.kinopoisk.ru/film/277537/') }
+  it { expect(dexter.url).to eq('http://www.kinopoisk.ru/film/277537/') }
   it { dexter.title.should eq('Правосудие Декстера') }
   it { dexter.title_en.should eq('Dexter') }
   it { dexter.countries.should eq(['США']) }
   it { dexter.year.should eq(2006) }
   it { dexter.poster.should eq('http://st.kp.yandex.net/images/film_iphone/iphone360_277537.jpg') }
-  it { dexter.poster_big.should eq('http://st.kp.yandex.net/images/film_big_iphone/iphone360_277537.jpg') }
+  it { dexter.poster_big.should eq('http://www.kinopoisk.ru/images/film_big/277537.jpg') }
   it { dexter.producers.map(&:name).should eq(['Сара Коллетон','Джон Голдвин','Роберт Ллойд Льюис']) }
   it { dexter.art_directors.map(&:name).should eq(['Джессика Кендер','Энтони Коули','Эрик Уейлер']) }
   it { dexter.operators.map(&:name).should eq(['Ромео Тироне','Джеф Джёр','Мартин Дж. Лэйтон']) }
