@@ -21,7 +21,7 @@ module Kinopoisk
 
     # Returns an array of strings containing actor names
     def actors
-      links_to_people doc.search '#actorList li a'
+      links_to_people doc.search('#actorList ul').first.search 'li a'
     end
 
     # Returns a string containing title in russian
