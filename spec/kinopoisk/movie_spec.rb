@@ -6,6 +6,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   let(:avatar)        { Kinopoisk::Movie.new 251733 }
   let(:hercules)      { Kinopoisk::Movie.new 461958 }
   let(:groundhog_day) { Kinopoisk::Movie.new 527    }
+  let(:knights)       { Kinopoisk::Movie.new 649576 }
 
   it { expect(dexter.url).to eq('http://www.kinopoisk.ru/film/277537/') }
   it { dexter.title.should eq('Правосудие Декстера') }
@@ -43,6 +44,8 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
 
   it { expect(groundhog_day.actors.map(&:name)).to include('Билл Мюррей', 'Энди МакДауэлл', 'Крис Эллиот', 'Стивен Тоболовски', 'Брайан Дойл-Мюррей', 'Марита Герати', 'Анджела Пэтон', 'Рик Дукомман', 'Рик Овертон', 'Робин Дьюк') }
   it { expect(groundhog_day.actors.count).to eq 10 }
+
+  it { expect(knights.actors).to be_empty }
 
   it 'should make only one request' do
     dexter.title
