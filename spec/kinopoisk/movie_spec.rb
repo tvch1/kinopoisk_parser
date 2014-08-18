@@ -7,6 +7,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   let(:hercules)      { Kinopoisk::Movie.new 461958 }
   let(:groundhog_day) { Kinopoisk::Movie.new 527    }
   let(:knights)       { Kinopoisk::Movie.new 649576 }
+  let(:druginniki)    { Kinopoisk::Movie.new 462455 }
 
   it { expect(dexter.url).to eq('http://www.kinopoisk.ru/film/277537/') }
   it { dexter.title.should eq('Правосудие Декстера') }
@@ -29,7 +30,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { dexter.premiere_ru.should eq('3 ноября 2008') }
   it { dexter.composers.map(&:name).should eq(['Дэниэл Лихт']) }
   it { dexter.imdb_rating_count.should be_a(Integer) }
-  it { dexter.imdb_rating.should be_a(Float) }
+  it { expect(dexter.imdb_rating).to be 9.0 }
   it { dexter.rating_count.should be_a(Integer) }
   it { dexter.rating.should be_a(Float) }
   it { dexter.box_office_ru.should eq('') }
@@ -46,6 +47,8 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { expect(groundhog_day.actors.count).to eq 10 }
 
   it { expect(knights.actors).to be_empty }
+
+  it { expect(druginniki.imdb_rating).to eq 5.7 }
 
   it 'should make only one request' do
     dexter.title

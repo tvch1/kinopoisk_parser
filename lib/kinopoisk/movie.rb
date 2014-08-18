@@ -37,7 +37,7 @@ module Kinopoisk
 
     # Returns a float imdb rating
     def imdb_rating
-      doc.search('#block_rating .block_2 div:last-child').text[/\d.\d\d/].to_f
+      doc.search('#block_rating .block_2 div:nth-child(2)').text[/\d\.\d\d/].to_f
     end
 
     # Returns an integer release year
