@@ -8,9 +8,10 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   let(:groundhog_day) { Kinopoisk::Movie.new 527    }
   let(:knights)       { Kinopoisk::Movie.new 649576 }
   let(:druginniki)    { Kinopoisk::Movie.new 462455 }
+  let(:encounter)     { Kinopoisk::Movie.new 687886 }
 
   it { expect(dexter.url).to eq('http://www.kinopoisk.ru/film/277537/') }
-  it { dexter.title.should eq('Правосудие Декстера') }
+  it { expect(dexter.title).to eq('Правосудие Декстера') }
   it { dexter.title_en.should eq('Dexter') }
   it { dexter.countries.should eq(['США']) }
   it { dexter.year.should eq(2006) }
@@ -50,6 +51,8 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
 
   it { expect(druginniki.imdb_rating).to eq 5.7 }
 
+  it { expect(encounter.title).to eq('Неожиданная встреча 2: Потеряный рай') }
+
   it 'should make only one request' do
     dexter.title
     dexter.countries
@@ -59,6 +62,10 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it 'should raise error if nothing found' do
     expect { Kinopoisk::Movie.new(111111111).title }.to raise_error
   end
+
+  # it 'should raise error if response is emtpy' do
+  #   pending
+  # end
 
   context 'by title' do
     let(:dexter_by_title) { Kinopoisk::Movie.new 'Dexter' }
