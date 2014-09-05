@@ -171,7 +171,7 @@ module Kinopoisk
     # Kinopoisk has defined first=yes param to redirect to first result
     # Return its id from location header
     def find_by_title(title)
-      url = SEARCH_URL+"#{URI.escape(title)}&first=yes"
+      url = "http://www.kinopoisk.ru/index.php?level=7&from=forma&result=adv&m_act[from]=forma&m_act[what]=content&m_act[find]=#{URI.escape title}&first=yes"
       Kinopoisk.fetch(url).headers['Location'].to_s.match(/\/(\d*)\/$/)[1]
     end
 
