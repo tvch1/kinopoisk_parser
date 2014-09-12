@@ -9,6 +9,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   let(:knights)       { Kinopoisk::Movie.new 649576 }
   let(:druginniki)    { Kinopoisk::Movie.new 462455 }
   let(:encounter)     { Kinopoisk::Movie.new 687886 }
+  let(:one_plus_one)  { Kinopoisk::Movie.new 535341 }
 
   it { expect(dexter.url).to eq('http://www.kinopoisk.ru/film/277537/') }
   it { expect(dexter.title).to eq('Правосудие Декстера') }
@@ -67,10 +68,10 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   #   pending
   # end
 
-  context 'by title' do
+  context 'by title \'Dexter\'' do
     let(:dexter_by_title) { Kinopoisk::Movie.new 'Dexter' }
 
-    it { dexter.url.should eq(dexter_by_title.url) }
+    it { expect(dexter_by_title.url).to eq dexter.url }
 
     it 'should make only one request to initialize' do
       dexter_by_title
@@ -82,5 +83,12 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
       dexter_by_title.countries
       a_request(:get, /.*/).should have_been_made.twice
     end
+  end
+
+  context 'by title \'1+1\'' do
+    let(:one_plus_one_by_title) { Kinopoisk::Movie.new '1+1' }
+
+    it { expect(one_plus_one_by_title.url).to eq one_plus_one.url }
+    it { expect(one_plus_one_by_title.year).to eq one_plus_one.year }
   end
 end
