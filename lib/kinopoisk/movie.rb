@@ -162,6 +162,11 @@ module Kinopoisk
       search_by_text 'слоган'
     end
 
+    def default_trailer_id
+      trailer_link_tag = doc.search("#trailerinfo a[href^='/film/#{id}/video/']").first
+      trailer_link_tag.attr(:href).gsub(/\/film\/\d+\/video\/(\d+)\//, '\1').to_i if trailer_link_tag
+    end
+
     private
 
     def doc

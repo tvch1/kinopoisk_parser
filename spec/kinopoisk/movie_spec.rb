@@ -11,6 +11,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   let(:encounter)     { Kinopoisk::Movie.new 687886 }
   let(:one_plus_one)  { Kinopoisk::Movie.new 535341 }
 
+  it { expect(dexter.default_trailer_id).to eq 82610 }
   it { expect(dexter.url).to eq('http://www.kinopoisk.ru/film/277537/') }
   it { expect(dexter.title).to eq('Правосудие Декстера') }
   it { dexter.title_en.should eq('Dexter') }
@@ -37,6 +38,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { dexter.rating.should be_a(Float) }
   it { dexter.box_office_ru.should eq('') }
 
+  it { expect(avatar.default_trailer_id).to eq 18381 }
   it { avatar.box_office_world.should eq(2782275172) }
   it { avatar.box_office_ru.should match('[$\d]') }
   it { avatar.box_office_us.should match('[$\d]') }
@@ -48,6 +50,7 @@ describe Kinopoisk::Movie, vcr: { cassette_name: 'movies' } do
   it { expect(groundhog_day.actors.map(&:name)).to include('Билл Мюррей', 'Энди МакДауэлл', 'Крис Эллиот', 'Стивен Тоболовски', 'Брайан Дойл-Мюррей', 'Марита Герати', 'Анджела Пэтон', 'Рик Дукомман', 'Рик Овертон', 'Робин Дьюк') }
   it { expect(groundhog_day.actors.count).to eq 10 }
 
+  it { expect(knights.default_trailer_id).to be_nil }
   it { expect(knights.actors).to be_empty }
 
   it { expect(druginniki.imdb_rating).to eq 5.7 }
