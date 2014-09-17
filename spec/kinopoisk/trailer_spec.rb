@@ -20,6 +20,8 @@ describe Kinopoisk::Trailer, vcr: { cassette_name: 'trailers' } do
   it { expect(godzilla.file(:sd, :medium)).to eq 'http://kp.cdn.yandex.net/260991/kinopoisk.ru-Godzilla-212112.mp4' }
   it { expect(godzilla.file(:sd, :low)).to be_nil }
 
+  it { expect(godzilla.best).to eq 'http://kp.cdn.yandex.net/260991/kinopoisk.ru-Godzilla-212114.mp4' }
+
   it { expect(godzilla_2nd.file(:sd, :low)).to eq 'http://kp.cdn.yandex.net/260991/kinopoisk.ru-Godzilla-201321.mp4' }
 
   it { expect(godzilla_ukr.file(:hd, :high)).to eq 'http://kp.cdn.yandex.net/260991/kinopoisk.ru-Godzilla-191553.mp4' }

@@ -25,28 +25,39 @@ module Kinopoisk
     end
 
     def file(dimensions, quality)
-      unless @files
-        @files = { hd: {}, sd: {} }
-        doc.search('td.news > a.continue').each do |link|
-          found_quality = case link.text
-          when 'Высокое качество'
-            :high
-          when 'Среднее качество'
-            :medium
-          when 'Низкое качество'
-            :low
-          end
-          found_dimensions = link.parent.parent.search("td > img[src*='hd']").any? ? :hd : :sd
-          @files[found_dimensions][found_quality] = link.attr 'href'
+      files[dimensions][quality] if files[dimensions][quality]
+    end
+
+    def best
+      @best ||= [:hd, :sd].map do |dimensions|
+        [:high, :medium, :low].map do |quality|
+          files[dimensions][quality]
         end
-      end
-      @files[dimensions][quality].gsub! /.*link=(.*)$/, '\1' if @files[dimensions][quality]
+      end.flatten.compact.first
     end
 
     private
 
     def doc
       @doc ||= Kinopoisk.parse url
+    end
+
+    def files
+      return  @files if @files
+      @files = { hd: {}, sd: {} }
+      doc.search('td.news > a.continue').each do |link|
+        found_quality = case link.text
+        when 'Высокое качество'
+          :high
+        when 'Среднее качество'
+          :medium
+        when 'Низкое качество'
+          :low
+        end
+        found_dimensions = link.parent.parent.search("td > img[src*='hd']").any? ? :hd : :sd
+        @files[found_dimensions][found_quality] = link.attr('href').gsub! /.*link=(.*)$/, '\1'
+      end
+      @files
     end
   end
 end
