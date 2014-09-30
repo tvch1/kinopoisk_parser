@@ -15,7 +15,9 @@ module Kinopoisk
     config = YAML.load_file('./kinopoisk_parser.yml')
     server_id = config['id'].to_i
     config['id'] = (server_id + 1) % 5
-    File.open './kinopoisk_parser.yml', 'w' { |file| file.write config.to_yaml }
+    File.open './kinopoisk_parser.yml', 'w' do |file|
+      file.write config.to_yaml
+    end
     response = HTTPClient.new.get("http://kinopoisk-parser-#{server_id}.herokuapp.com/page?url=#{url}", nil , { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' })
     Marshal.restore(JSON.parse(response.body)['message'].encode('Windows-1251'))
   end
