@@ -15,7 +15,8 @@ module Kinopoisk
     config = YAML.load_file('./kinopoisk_parser.yml')
     server_id = config['id'].to_i
     config['id'] = (server_id + 1) % 5
-    HTTPClient.new.get "http://kinopoisk-parser-#{server_id}.herokuapp.com/page?url=#{url}", nil , { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' }
+    response = HTTPClient.new.get("http://kinopoisk-parser-#{server_id}.herokuapp.com/page?url=#{url}", nil , { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' })
+    Marshal.restore(JSON.parse(response.body)['message'].encode('Windows-1251'))
   end
 
   # Returns a nokogiri document or an error if fetch response status is not 200
