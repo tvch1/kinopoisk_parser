@@ -14,7 +14,7 @@ module Kinopoisk
   def self.fetch(url)
     config = YAML.load_file('./kinopoisk_parser.yml')
     server_id = config['id'].to_i
-    config['id'] = (server_id + 1) % 5
+    config.store 'id', (server_id + 1) % 5
     response = HTTPClient.new.get("http://kinopoisk-parser-#{server_id}.herokuapp.com/page?url=#{url}", nil , { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' })
     Marshal.restore(JSON.parse(response.body)['message'].encode('Windows-1251'))
   end
