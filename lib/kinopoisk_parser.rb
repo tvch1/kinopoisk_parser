@@ -19,7 +19,6 @@ module Kinopoisk
       file.write config.to_yaml
     end
     response = HTTPClient.new.get("http://kinopoisk-parser-#{server_id}.herokuapp.com/page?url=#{url}", nil , { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' })
-    print "http://kinopoisk-parser-#{server_id}.herokuapp.com/page?url=#{url}"
     Marshal.restore(JSON.parse(response.body)['message'].encode('Windows-1251'))
   end
   
