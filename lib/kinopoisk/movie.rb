@@ -176,8 +176,13 @@ module Kinopoisk
     # Kinopoisk has defined first=yes param to redirect to first result
     # Return its id from location header
     def find_by_title(title)
-      url = "http://www.kinopoisk.ru/index.php?level=7&from=forma&result=adv&m_act[from]=forma&m_act[what]=content&m_act[find]=#{URI.encode_www_form_component title}&first=yes"
-      Kinopoisk.fetch(url).headers['Location'].to_s.match(/\/(\d*)\/$/)[1]
+      print url = "http://www.kinopoisk.ru/index.php?level=7&from=forma&result=adv&m_act[from]=forma&m_act[what]=content&m_act[find]=#{URI.encode_www_form_component title}&first=yes"
+      url = "http://www.kinopoisk.ru/index.php?first=no&what=&kp_query=#{URI.encode_www_form_component title}"
+      url = "http://m.kinopoisk.ru/search/#{URI.encode_www_form_component title}"
+      #Kinopoisk.fetch(url).body
+      k = Kinopoisk._parse url
+      r = k.search('a').first(3).last.attr('href')[/(\d+)/, 1].to_i
+      r 
     end
 
     def search_by_itemprop(name)
