@@ -18,10 +18,18 @@ module Kinopoisk
     File.open './kinopoisk_parser.yml', 'w' do |file|
       file.write config.to_yaml
     end
-    response = HTTPClient.new.get("http://kinopoisk-parser-#{server_id}.herokuapp.com/page?url=#{url}", nil , { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' })
+    client = HTTPClient.new
+    i = 0
+    response = nil
+    while  i < 10 && response.try(:code) != 200
+      response = client.get("http://kinopoisk-parser-#{server_id}.herokuapp.com/page?url=#{url}", nil , { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' })
+      print "\nhttp://kinopoisk-parser-#{server_id}.herokuapp.com/page?url=#{url} - #{response.code}"
+      i += 1
+    end
+
     Marshal.restore(JSON.parse(response.body)['message'].encode('Windows-1251'))
   end
-  
+
   def self._fetch(url)
     response = HTTPClient.new.get("#{url}", nil , { 'User-Agent'=>'a', 'Accept-Encoding'=>'a' })
     response
@@ -33,7 +41,7 @@ module Kinopoisk
     raise(Empty) if p.http_body.content.size.zero?
     p.status==200 ? Nokogiri::HTML(p.body.encode('utf-8')) : raise(NotFound)
   end
-   
+
   def self._parse(url)
     p = _fetch url
     raise(Empty) if p.body.size.zero?
