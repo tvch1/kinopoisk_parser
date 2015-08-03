@@ -27,6 +27,9 @@ module Kinopoisk
       i += 1
     end
 
+    raise(NotFound) unless response.try(:code) == 200
+
+
     Marshal.restore(JSON.parse(response.body)['message'].encode('Windows-1251'))
   end
 
